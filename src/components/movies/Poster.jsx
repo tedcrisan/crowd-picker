@@ -51,7 +51,7 @@ const Container = styled.div`
   position: relative;
   border-radius: 5px;
   overflow: hidden;
-  background: lightseagreen;
+  background: black;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
 `;
 
