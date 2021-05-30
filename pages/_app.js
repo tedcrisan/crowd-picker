@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
         <Provider session={pageProps.session}>
           <MainLayout>
             <Component {...pageProps} />
-            <ToastContainer />
+            <ToastContainer position="top-center" />
           </MainLayout>
         </Provider>
       </ThemeProvider>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import { useSession } from "next-auth/client";
 import axios from "axios";
 
@@ -20,7 +21,7 @@ export function Selection() {
         .then(({ data }) => router.push(`/list/${data.id}`))
         .catch((err) => console.log(err));
     } else {
-      console.log("YOU NEED TO BE LOGGED IN TO CREATE A LIST");
+      toast.error("You need to be logged in to create a list");
     }
   };
 
