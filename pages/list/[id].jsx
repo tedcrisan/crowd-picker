@@ -21,9 +21,11 @@ export default function List({ id }) {
   useEffect(() => {
     if (id) {
       fetchList(id).then((list) => {
-        setCreator(list.creator);
-        setUnwatched(list.unwatched);
-        setWatched(list.watched);
+        if (list) {
+          setCreator(list.creator);
+          setUnwatched(list.unwatched);
+          setWatched(list.watched);
+        }
       });
     }
   }, []);

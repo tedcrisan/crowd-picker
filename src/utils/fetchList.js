@@ -2,8 +2,9 @@ import axios from "axios";
 
 export async function fetchList(id) {
   try {
-    const response = await axios.get(`/api/list/${id}`);
-    return response.data.payload;
+    const { data } = await axios.get(`/api/list/${id}`);
+    if (data.payload) return data.payload;
+    return false;
   } catch (err) {
     console.log(err);
   }

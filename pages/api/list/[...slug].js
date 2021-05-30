@@ -74,7 +74,13 @@ export default async (req, res) => {
             watched,
             unwatched,
           };
-          res.status(200).json({ payload: formatedList });
+
+          //Prevent null list on list creation
+          if (formatedList.unwatched[0].imdbID === null) {
+            res.status(200).json({ message: "List successfully created" });
+          } else {
+            res.status(200).json({ payload: formatedList });
+          }
         })
         .catch((err) => {
           console.log(err);
