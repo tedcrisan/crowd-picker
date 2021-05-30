@@ -1,10 +1,16 @@
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import styled from "styled-components";
+import { Selection } from "../src/components/Selection";
 
 export default function Home() {
-  return <Title>My page</Title>
+  return (
+    <Container>
+      <Selection />
+    </Container>
+  );
 }
+
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
