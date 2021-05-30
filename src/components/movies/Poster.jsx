@@ -35,10 +35,12 @@ export function Poster({ movie, creator, removeMovie, switchList, list, toggleLi
         )}
       </Details>
       {!movie.watched && (
-        <LikesContainer onClick={() => toggleLike(movie.imdbID)}>
-          <Likes>{movie.total_likes}</Likes>
-          {movie.user_liked ? <HiThumbUp size="18px" /> : <HiOutlineThumbUp size="18px" />}
-        </LikesContainer>
+        <BottomContainer>
+          <LikesContainer onClick={() => toggleLike(movie.imdbID)}>
+            <Likes>{movie.total_likes}</Likes>
+            {movie.user_liked ? <HiThumbUp size="18px" /> : <HiOutlineThumbUp size="18px" />}
+          </LikesContainer>
+        </BottomContainer>
       )}
       {movie.watched && <WatchedContainer>Watched</WatchedContainer>}
     </Container>
@@ -102,11 +104,20 @@ const SpanContainer = styled.span`
   cursor: pointer;
 `;
 
+const BottomContainer = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  padding: 1em;
+`;
+
 const LikesContainer = styled(SpanContainer)`
   position: absolute;
   bottom: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   color: hsl(168, 80%, 23%);
   background: hsl(154, 75%, 87%);
 
