@@ -114,22 +114,23 @@ export default function List({ id }) {
   return (
     <Container>
       <Search {...{ query, search, data, reset, addMovie, movieIDs }} />
+      <p>List ID: {id}</p>
       <Movies>
-        <Gallery title="watched">
-          {watched.map((movie) => (
-            <Poster
-              key={movie.imdbID}
-              {...{ movie, creator, switchList, removeMovie }}
-              list={"watched"}
-            />
-          ))}
-        </Gallery>
         <Gallery title="unwatched">
           {unwatched.map((movie) => (
             <Poster
               key={movie.imdbID}
               {...{ movie, creator, removeMovie, switchList, toggleLike }}
               list={"unwatched"}
+            />
+          ))}
+        </Gallery>
+        <Gallery title="watched">
+          {watched.map((movie) => (
+            <Poster
+              key={movie.imdbID}
+              {...{ movie, creator, switchList, removeMovie }}
+              list={"watched"}
             />
           ))}
         </Gallery>

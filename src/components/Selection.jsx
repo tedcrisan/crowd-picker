@@ -30,7 +30,7 @@ export function Selection() {
       <Image src="/found.svg" alt="Random" width="260" height="260" />
       <Text>Already have a list ID?</Text>
       <ListInput>
-        <Input type="text" placeholder="List Code" value={listID} onChange={handleChange} />
+        <Input type="text" placeholder="List ID" value={listID} onChange={handleChange} />
         <Enter onClick={enterList}>Enter</Enter>
       </ListInput>
       <Text>or</Text>
