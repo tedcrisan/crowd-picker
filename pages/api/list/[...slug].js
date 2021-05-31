@@ -17,7 +17,7 @@ export default async (req, res) => {
       // Get list from database
       const getQuery = `
       SELECT
-        creator, movie_id, movie_data AS data, watched, ARRAY_AGG(likes.email) AS likes
+        creator, movie_id, movie_data AS data, watched, ARRAY_AGG(likes.email) AS likes, movies.created_at as date
       FROM
         lists
         LEFT JOIN movies ON lists.list_id = movies.list_id
@@ -25,7 +25,7 @@ export default async (req, res) => {
       WHERE
         lists.list_id = $1
       GROUP BY
-        creator, movie_id, movie_data, watched;
+        creator, movie_id, movie_data, watched, movies.created_at;
       `;
       pool
         .query(getQuery, [listID])
@@ -43,6 +43,7 @@ export default async (req, res) => {
                     watched: true,
                     total_likes: movie.likes.includes(null) ? 0 : movie.likes.length,
                     user_liked: movie.likes.includes(session?.user.email) ?? false,
+                    date: movie.date,
                   },
                 ];
               } else {
@@ -54,6 +55,7 @@ export default async (req, res) => {
                     watched: false,
                     total_likes: movie.likes.includes(null) ? 0 : movie.likes.length,
                     user_liked: movie.likes.includes(session?.user.email) ?? false,
+                    date: movie.date,
                   },
                 ];
               }

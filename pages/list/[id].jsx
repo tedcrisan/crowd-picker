@@ -140,11 +140,25 @@ export default function List({ id }) {
     setWatched(sortedWatched);
   };
 
+  const sortByDate = () => {
+    const tempUnwatched = [...unwatched];
+    const tempWatched = [...watched];
+    const sortedUnwatched = tempUnwatched.sort(
+      (first, second) => new Date(second.date) - new Date(first.date)
+    );
+    const sortedWatched = tempWatched.sort(
+      (first, second) => new Date(second.date) - new Date(first.date)
+    );
+    console.log(sortedUnwatched);
+    setUnwatched(sortedUnwatched);
+    setWatched(sortedWatched);
+  };
+
   return (
     <Container>
       <Search {...{ query, search, data, reset, addMovie, movieIDs }} />
       <p>List ID: {id}</p>
-      <Movies {...{ sortAlphabetically, sortByLikes }}>
+      <Movies {...{ sortAlphabetically, sortByLikes, sortByDate }}>
         <Gallery
           title="unwatched"
           movieList={unwatched}
