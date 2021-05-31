@@ -111,11 +111,41 @@ export default function List({ id }) {
     }
   };
 
+  const sortByLikes = () => {
+    const tempUnwatched = [...unwatched];
+    const tempWatched = [...watched];
+    const sortedUnwatched = tempUnwatched.sort(
+      (first, second) => second.total_likes - first.total_likes
+    );
+    const sortedWatched = tempWatched.sort(
+      (first, second) => second.total_likes - first.total_likes
+    );
+    setUnwatched(sortedUnwatched);
+    setWatched(sortedWatched);
+  };
+
+  const sortAlphabetically = () => {
+    const tempUnwatched = [...unwatched];
+    const tempWatched = [...watched];
+    const sortedUnwatched = tempUnwatched.sort((first, second) => {
+      if (first.title < second.title) return -1;
+      if (first.title > second.title) return 1;
+      return 0;
+    });
+    const sortedWatched = tempWatched.sort((first, second) => {
+      if (first.title < second.title) return -1;
+      if (first.title > second.title) return 1;
+      return 0;
+    });
+    setUnwatched(sortedUnwatched);
+    setWatched(sortedWatched);
+  };
+
   return (
     <Container>
       <Search {...{ query, search, data, reset, addMovie, movieIDs }} />
       <p>List ID: {id}</p>
-      <Movies>
+      <Movies {...{ sortAlphabetically, sortByLikes }}>
         <Gallery title="unwatched">
           {unwatched.map((movie) => (
             <Poster
