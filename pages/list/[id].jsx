@@ -7,7 +7,6 @@ import useFetchBySearch from "../../src/utils/useFetchBySearch";
 import { Search } from "../../src/components/search";
 import { Movies } from "../../src/components/movies";
 import { Gallery } from "../../src/components/movies/Gallery";
-import { Poster } from "../../src/components/movies/Poster";
 import { fetchList } from "../../src/utils/fetchList";
 
 export default function List({ id }) {
@@ -146,24 +145,17 @@ export default function List({ id }) {
       <Search {...{ query, search, data, reset, addMovie, movieIDs }} />
       <p>List ID: {id}</p>
       <Movies {...{ sortAlphabetically, sortByLikes }}>
-        <Gallery title="unwatched">
-          {unwatched.map((movie) => (
-            <Poster
-              key={movie.imdbID}
-              {...{ movie, creator, removeMovie, switchList, toggleLike }}
-              list={"unwatched"}
-            />
-          ))}
-        </Gallery>
-        <Gallery title="watched">
-          {watched.map((movie) => (
-            <Poster
-              key={movie.imdbID}
-              {...{ movie, creator, switchList, removeMovie }}
-              list={"watched"}
-            />
-          ))}
-        </Gallery>
+        <Gallery
+          title="unwatched"
+          movieList={unwatched}
+          {...{ creator, removeMovie, switchList, toggleLike }}
+        />
+        <Gallery
+          title="watched"
+          movieList={watched}
+          initialHide={true}
+          {...{ creator, removeMovie, switchList, toggleLike }}
+        />
       </Movies>
     </Container>
   );

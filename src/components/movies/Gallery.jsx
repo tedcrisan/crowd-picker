@@ -1,11 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { Poster } from "../movies/Poster";
 
-export function Gallery({ title, children }) {
-  const [hide, setHide] = useState(false);
+export function Gallery({
+  title,
+  creator,
+  removeMovie,
+  switchList,
+  toggleLike,
+  movieList,
+  initialHide = false,
+}) {
+  const [hide, setHide] = useState(initialHide);
+  const [value, setValue] = useState("");
+  const [galleryList, setGalleryList] = useState(movieList);
+
+  useEffect(() => {
+    if (value.length === 0) {
+      setGalleryList(movieList);
+    } else {
+      let tempList = [];
+      movieList.forEach((movie) => {
+        if (movie.title.toLowerCase().includes(value.toLowerCase()))
+          tempList = [...tempList, movie];
+      });
+      setGalleryList(tempList);
+    }
+  }, [value, movieList]);
 
   const toggleHide = () => setHide((prev) => !prev);
+  const handleValue = (e) => setValue(e.target.value);
 
   return (
     <Container>
@@ -15,13 +40,34 @@ export function Gallery({ title, children }) {
           {hide ? <FiChevronUp size="24px" /> : <FiChevronDown size="24px" />}
         </VisibilityButton>
       </Header>
-      {!hide && <Content className={hide ? "hide" : ""}>{children}</Content>}
+      {!hide && (
+        <>
+          <SearchInput
+            type="text"
+            placeholder={`Search ${title}`}
+            value={value}
+            onChange={handleValue}
+          />
+          <Content className={hide ? "hide" : ""}>
+            {galleryList.map((movie) => (
+              <Poster
+                key={movie.imdbID}
+                {...{ movie, creator, removeMovie, switchList, toggleLike }}
+                list={title}
+              />
+            ))}
+          </Content>
+        </>
+      )}
     </Container>
   );
 }
 
 const Container = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   overflow-y: hidden;
 `;
 
@@ -49,6 +95,14 @@ const Content = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
   gap: 1em;
+`;
+
+const SearchInput = styled.input`
+  max-width: 20em;
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
 `;
 
 const VisibilityButton = styled.button`
