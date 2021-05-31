@@ -9,6 +9,7 @@ export function Gallery({
   removeMovie,
   switchList,
   toggleLike,
+  toggleNeverWatched,
   movieList,
   initialHide = false,
 }) {
@@ -52,7 +53,7 @@ export function Gallery({
             {galleryList.map((movie) => (
               <Poster
                 key={movie.imdbID}
-                {...{ movie, creator, removeMovie, switchList, toggleLike }}
+                {...{ movie, creator, removeMovie, switchList, toggleLike, toggleNeverWatched }}
                 list={title}
               />
             ))}

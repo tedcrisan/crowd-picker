@@ -110,6 +110,32 @@ export default function List({ id }) {
     }
   };
 
+  const toggleNeverWatched = (movieID) => {
+    //Only allow logged in users to mark movie never watched
+    if (session) {
+      axios
+        .patch(`/api/list/${id}/${movieID}`, { action: "never_watched" })
+        .then(({ data }) => {
+          const newUnwatched = unwatched.map((movie) => {
+            if (movie.imdbID === movieID) {
+              return {
+                ...movie,
+                total_nevers: data.payload.total_nevers,
+                user_never_watched: data.payload.user_never_watched,
+              };
+            } else {
+              return movie;
+            }
+          });
+
+          setUnwatched(newUnwatched);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toast.error("You need to be logged in to like a movie");
+    }
+  };
+
   const sortByLikes = () => {
     const tempUnwatched = [...unwatched];
     const tempWatched = [...watched];
@@ -118,6 +144,19 @@ export default function List({ id }) {
     );
     const sortedWatched = tempWatched.sort(
       (first, second) => second.total_likes - first.total_likes
+    );
+    setUnwatched(sortedUnwatched);
+    setWatched(sortedWatched);
+  };
+
+  const sortByNeverWatched = () => {
+    const tempUnwatched = [...unwatched];
+    const tempWatched = [...watched];
+    const sortedUnwatched = tempUnwatched.sort(
+      (first, second) => second.total_nevers - first.total_nevers
+    );
+    const sortedWatched = tempWatched.sort(
+      (first, second) => second.total_nevers - first.total_nevers
     );
     setUnwatched(sortedUnwatched);
     setWatched(sortedWatched);
@@ -149,7 +188,6 @@ export default function List({ id }) {
     const sortedWatched = tempWatched.sort(
       (first, second) => new Date(second.date) - new Date(first.date)
     );
-    console.log(sortedUnwatched);
     setUnwatched(sortedUnwatched);
     setWatched(sortedWatched);
   };
@@ -158,17 +196,17 @@ export default function List({ id }) {
     <Container>
       <Search {...{ query, search, data, reset, addMovie, movieIDs }} />
       <p>List ID: {id}</p>
-      <Movies {...{ sortAlphabetically, sortByLikes, sortByDate }}>
+      <Movies {...{ sortAlphabetically, sortByLikes, sortByDate, sortByNeverWatched }}>
         <Gallery
           title="unwatched"
           movieList={unwatched}
-          {...{ creator, removeMovie, switchList, toggleLike }}
+          {...{ creator, removeMovie, switchList, toggleLike, toggleNeverWatched }}
         />
         <Gallery
           title="watched"
           movieList={watched}
           initialHide={true}
-          {...{ creator, removeMovie, switchList, toggleLike }}
+          {...{ creator, removeMovie, switchList, toggleLike, toggleNeverWatched }}
         />
       </Movies>
     </Container>

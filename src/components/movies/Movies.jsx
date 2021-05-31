@@ -2,8 +2,15 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FaSortAlphaDown, FaSortNumericDownAlt } from "react-icons/fa";
 import { FiList, FiGrid, FiCalendar } from "react-icons/fi";
+import { HiOutlineEyeOff } from "react-icons/hi";
 
-export function Movies({ children, sortAlphabetically, sortByLikes, sortByDate }) {
+export function Movies({
+  children,
+  sortAlphabetically,
+  sortByLikes,
+  sortByDate,
+  sortByNeverWatched,
+}) {
   const [viewMode, setViewMode] = useState("gallery");
 
   const toggleView = () => (viewMode === "gallery" ? setViewMode("list") : setViewMode("gallery"));
@@ -11,6 +18,9 @@ export function Movies({ children, sortAlphabetically, sortByLikes, sortByDate }
   return (
     <Container>
       <ListHeader>
+        <ViewButton onClick={sortByNeverWatched}>
+          <HiOutlineEyeOff size="24px" title="Sort by never watched" />
+        </ViewButton>
         <ViewButton onClick={sortByDate}>
           <FiCalendar size="24px" title="Sort by most recent" />
         </ViewButton>

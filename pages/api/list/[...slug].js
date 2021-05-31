@@ -17,11 +17,15 @@ export default async (req, res) => {
       // Get list from database
       const getQuery = `
       SELECT
-        creator, movie_id, movie_data AS data, watched, ARRAY_AGG(likes.email) AS likes, movies.created_at as date
+        creator, movie_id, movie_data AS data, watched, 
+        ARRAY_AGG(DISTINCT likes.email) AS likes,
+        ARRAY_AGG(DISTINCT never_watched.email) AS nevers,
+        movies.created_at as date
       FROM
         lists
         LEFT JOIN movies ON lists.list_id = movies.list_id
         LEFT JOIN likes ON movies.id = likes.id
+        LEFT JOIN never_watched ON movies.id = never_watched.id
       WHERE
         lists.list_id = $1
       GROUP BY
@@ -43,6 +47,8 @@ export default async (req, res) => {
                     watched: true,
                     total_likes: movie.likes.includes(null) ? 0 : movie.likes.length,
                     user_liked: movie.likes.includes(session?.user.email) ?? false,
+                    total_nevers: movie.nevers.includes(null) ? 0 : movie.nevers.length,
+                    user_never_watched: movie.nevers.includes(session?.user.email) ?? false,
                     date: movie.date,
                   },
                 ];
@@ -55,6 +61,8 @@ export default async (req, res) => {
                     watched: false,
                     total_likes: movie.likes.includes(null) ? 0 : movie.likes.length,
                     user_liked: movie.likes.includes(session?.user.email) ?? false,
+                    total_nevers: movie.nevers.includes(null) ? 0 : movie.nevers.length,
+                    user_never_watched: movie.nevers.includes(session?.user.email) ?? false,
                     date: movie.date,
                   },
                 ];
@@ -154,6 +162,53 @@ export default async (req, res) => {
                 ? checkForLikesResponse.rows[0].users.length + 1
                 : 1,
               user_liked: true,
+            };
+          }
+
+          res.json({ payload });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      //Toggle never_watched to specific movie
+      if (session && req.body.action === "never_watched") {
+        let payload;
+        try {
+          const getMovieIDQuery = `SELECT id FROM movies WHERE list_id = $1 AND movie_id = $2`;
+          const getMovieIDResponse = await pool.query(getMovieIDQuery, [listID, movieID]);
+          const checkForNeverQuery = `SELECT ARRAY_AGG(email) AS users FROM never_watched WHERE id = $1`;
+          const checkForNeverResponse = await pool.query(checkForNeverQuery, [
+            getMovieIDResponse.rows[0].id,
+          ]);
+
+          //If not null and contains user, delete never_watched
+          if (
+            checkForNeverResponse.rows[0].users &&
+            checkForNeverResponse.rows[0].users.includes(session.user.email)
+          ) {
+            //never_watched exists, so remove it
+            const deleteNeverQuery = `DELETE FROM never_watched WHERE id = $1 AND email = $2;`;
+            const deleteNeverResponse = await pool.query(deleteNeverQuery, [
+              getMovieIDResponse.rows[0].id,
+              session.user.email,
+            ]);
+            payload = {
+              total_nevers: checkForNeverResponse.rows[0].users.length - 1,
+              user_never_watched: false,
+            };
+          } else {
+            //never_watched does not exist, so add it
+            const insertNeverQuery = `INSERT INTO never_watched(id, email) VALUES ($1, $2) ON CONFLICT DO NOTHING;`;
+            const insertNeverResponse = await pool.query(insertNeverQuery, [
+              getMovieIDResponse.rows[0].id,
+              session.user.email,
+            ]);
+            payload = {
+              total_nevers: checkForNeverResponse.rows[0].users
+                ? checkForNeverResponse.rows[0].users.length + 1
+                : 1,
+              user_never_watched: true,
             };
           }
 

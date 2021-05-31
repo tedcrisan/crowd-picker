@@ -1,9 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { HiThumbUp, HiOutlineThumbUp } from "react-icons/hi";
+import { HiThumbUp, HiOutlineThumbUp, HiOutlineEyeOff, HiEyeOff } from "react-icons/hi";
 import { SiImdb } from "react-icons/si";
 
-export function Poster({ movie, creator, removeMovie, switchList, list, toggleLike }) {
+export function Poster({
+  movie,
+  creator,
+  removeMovie,
+  switchList,
+  list,
+  toggleLike,
+  toggleNeverWatched,
+}) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -36,6 +44,10 @@ export function Poster({ movie, creator, removeMovie, switchList, list, toggleLi
       </Details>
       {!movie.watched && (
         <BottomContainer>
+          <NeverWatchedContainer onClick={() => toggleNeverWatched(movie.imdbID)}>
+            <Likes>{movie.total_nevers}</Likes>
+            {movie.user_never_watched ? <HiEyeOff size="18px" /> : <HiOutlineEyeOff size="18px" />}
+          </NeverWatchedContainer>
           <LikesContainer onClick={() => toggleLike(movie.imdbID)}>
             <Likes>{movie.total_likes}</Likes>
             {movie.user_liked ? <HiThumbUp size="18px" /> : <HiOutlineThumbUp size="18px" />}
@@ -123,6 +135,19 @@ const LikesContainer = styled(SpanContainer)`
 
   &:hover {
     background: hsl(158, 58%, 62%);
+  }
+`;
+
+const NeverWatchedContainer = styled(SpanContainer)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  color: hsl(43, 77%, 27%);
+  background: hsl(45, 86%, 81%);
+
+  &:hover {
+    background: hsl(43, 89%, 70%);
   }
 `;
 
