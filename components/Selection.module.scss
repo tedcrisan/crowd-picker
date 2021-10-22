@@ -1,0 +1,47 @@
+#container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#input {
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  margin-right: 1em;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+#enter {
+  font-size: 1.2em;
+  padding: 0.5em 1.2em;
+  color: hsl(210, 36%, 96%);
+  background: hsl(209, 34%, 30%);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+
+  &:hover {
+    background: hsl(209, 61%, 16%);
+  }
+}
+
+#createButton {
+  font-size: 1.3em;
+  padding: 0.6em 2em;
+  color: hsl(210, 36%, 96%);
+  background: hsl(209, 34%, 30%);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+
+  &:hover {
+    background: hsl(209, 61%, 16%);
+  }
+}

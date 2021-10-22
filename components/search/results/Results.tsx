@@ -1,16 +1,5 @@
-import styled from "styled-components";
+import styles from "./Results.module.scss";
 
 export function Results({ children }) {
-  return <Container>{children}</Container>;
+  return <div id={styles.container}>{children}</div>;
 }
-
-const Container = styled.div`
-  position: absolute;
-  top: 3em;
-  left: 0;
-  width: 100%;
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  z-index: 10;
-`;

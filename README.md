@@ -1,32 +1,39 @@
 # Crowd Picker
+
 Have your community decide what the next movie you watch be.
 
 # Hosted Site
+
 https://crowd-picker.vercel.app/
 
 ## Example list
+
 https://crowd-picker.vercel.app/list/s5HnMR8-
 
 # Features
+
 - Login system
 - Persistant votes
 - Unlimited lists
 
 # Tech
+
 - Next.js (Framework)
 - Next Auth
 - React
-- Styled Components
+- CSS Modules
+- Sass
 - PostgreSQL
 
 # Requirements
+
 - An API key from OMDB: http://www.omdbapi.com/apikey.aspx
 - Register application with OAuth provider (This app uses Google)
 - A PostgreSQL database with the following tables:
   <details>
   <summary>Table Queries</summary>
   <p>
-  
+
   ```sql
       CREATE TABLE users (
       id SERIAL,
@@ -66,14 +73,16 @@ https://crowd-picker.vercel.app/list/s5HnMR8-
         PRIMARY KEY(id, email)
       );
   ```
-  
+
   </p>
   </details>
 
 # Installation
+
 > 1. git clone https://github.com/tedcrisan/crowd-picker.git
 > 2. yarn install or npm install (Choose whatever command is equivalent in your package manager)
-> 3. Populate .env.local file 
+> 3. Populate .env.local file
+
   <details>
   <summary>Necessary Environment Variables</summary>
   
@@ -91,4 +100,5 @@ https://crowd-picker.vercel.app/list/s5HnMR8-
   </details>
 
 # Deployment
+
 I used Vercel to deploy the app. Please use what you feel comfortable (Heroku, Netlify, DigitalOcean, etc...)

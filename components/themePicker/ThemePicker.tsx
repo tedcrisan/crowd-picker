@@ -30,9 +30,9 @@ export function ThemePicker() {
         value={theme}
         onChange={(e: ChangeEvent<HTMLSelectElement>) => chooseTheme(e.target.value as Themes)}
       >
-        {themesList.map((single) => (
-          <option className={styles.optionBar} value={single}>
-            {single}
+        {themesList.map((name) => (
+          <option key={name} className={styles.optionBar} value={name}>
+            {name}
           </option>
         ))}
       </select>

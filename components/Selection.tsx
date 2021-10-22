@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/client";
 import axios from "axios";
+
+import styles from "./Selection.module.scss";
 
 export function Selection() {
   const router = useRouter();
@@ -26,68 +27,26 @@ export function Selection() {
   };
 
   return (
-    <Container>
+    <div id={styles.container}>
       <Image src="/found.svg" alt="Random" width="260" height="260" />
-      <Text>Already have a list ID?</Text>
-      <ListInput>
-        <Input type="text" placeholder="List ID" value={listID} onChange={handleChange} />
-        <Enter onClick={enterList}>Enter</Enter>
-      </ListInput>
-      <Text>or</Text>
-      <Text>Create a new list</Text>
-      <CreateButton onClick={createList}>Create</CreateButton>
-    </Container>
+      <p>Already have a list ID?</p>
+      <div>
+        <input
+          id={styles.input}
+          type="text"
+          placeholder="List ID"
+          value={listID}
+          onChange={handleChange}
+        />
+        <button id={styles.enter} onClick={enterList}>
+          Enter
+        </button>
+      </div>
+      <p>or</p>
+      <p>Create a new list</p>
+      <button id={styles.createButton} onClick={createList}>
+        Create
+      </button>
+    </div>
   );
 }
-
-const Container = styled.div`
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ListInput = styled.div``;
-
-const Input = styled.input`
-  font-size: 1.2em;
-  padding: 0.5em 1em;
-  margin-right: 1em;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-`;
-
-const Enter = styled.button`
-  font-size: 1.2em;
-  padding: 0.5em 1.2em;
-  color: hsl(210, 36%, 96%);
-  background: hsl(209, 34%, 30%);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-
-  &:hover {
-    background: hsl(209, 61%, 16%);
-  }
-`;
-
-const Text = styled.p``;
-
-const CreateButton = styled.button`
-  font-size: 1.3em;
-  padding: 0.6em 2em;
-  color: hsl(210, 36%, 96%);
-  background: hsl(209, 34%, 30%);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-
-  &:hover {
-    background: hsl(209, 61%, 16%);
-  }
-`;
