@@ -1,0 +1,29 @@
+#container {
+  grid-area: movies;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    "tool"
+    "rest";
+  gap: 1em;
+  height: 100%;
+  padding: 0 1em 1em 1em;
+  margin-top: 1em;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+#tools {
+  grid-area: tool;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+#content {
+  grid-area: rest;
+  background: var(--bg-primary);
+  padding-bottom: 1em;
+}

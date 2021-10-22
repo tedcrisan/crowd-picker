@@ -1,0 +1,162 @@
+html {
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .light {
+    height: 100vh;
+    --bg-primary: white;
+    --bg-secondary: hsl(0, 0%, 90%);
+    --text-primary: hsl(200, 15%, 20%);
+    --text-secondary: hsl(271, 100%, 35%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .dark {
+    height: 100vh;
+    --bg-primary: hsl(200, 15%, 22%);
+    --bg-secondary: hsl(200, 15%, 17%);
+    --text-primary: hsl(0, 0%, 85%);
+    --text-secondary: hsl(41, 89%, 47%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+
+    &::-webkit-scrollbar-track {
+      background: black;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: red;
+      outline: 1px solid green;
+    }
+  }
+
+  .solarized_dark {
+    height: 100vh;
+    --bg-primary: hsl(192, 100%, 11%);
+    --bg-secondary: hsl(192, 81%, 14%);
+    --text-primary: hsl(68, 100%, 30%);
+    --text-secondary: hsl(45, 100%, 35%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .carbon {
+    height: 100vh;
+    --bg-primary: hsl(0, 0%, 28%);
+    --bg-secondary: hsl(40, 42%, 81%);
+    --text-primary: hsl(0, 0%, 10%);
+    --text-secondary: hsl(26, 99%, 46%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .monokai {
+    height: 100vh;
+    --bg-primary: hsl(70, 8%, 15%);
+    --bg-secondary: hsl(70, 8%, 20%);
+    --text-primary: hsl(338, 94%, 56%);
+    --text-secondary: hsl(80, 75%, 53%);
+    --success-primary: hsl(261, 100%, 75%);
+    --success-text: hsl(261, 100%, 45%);
+    --success-hover: hsl(261, 100%, 85%);
+    --warning-primary: hsl(189, 81%, 66%);
+    --warning-text: hsl(189, 81%, 26%);
+    --warning-hover: hsl(189, 81%, 76%);
+    --danger-primary: hsl(32, 98%, 55%);
+    --danger-text: hsl(32, 98%, 25%);
+    --danger-hover: hsl(32, 98%, 65%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .dracula {
+    height: 100vh;
+    --bg-primary: hsl(231, 15%, 18%);
+    --bg-secondary: hsl(232, 14%, 31%);
+    --text-primary: hsl(60, 30%, 96%);
+    --text-secondary: hsl(326, 100%, 74%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .terminal {
+    height: 100vh;
+    --bg-primary: hsl(0, 0%, 0%);
+    --bg-secondary: hsl(0, 0%, 10%);
+    --text-primary: hsl(78, 73%, 38%);
+    --text-secondary: hsl(80, 75%, 83%);
+    --success-primary: hsl(154, 75%, 87%);
+    --success-text: hsl(168, 80%, 23%);
+    --success-hover: hsl(158, 58%, 62%);
+    --warning-primary: hsl(45, 86%, 81%);
+    --warning-text: hsl(43, 77%, 27%);
+    --warning-hover: hsl(43, 89%, 70%);
+    --danger-primary: hsl(360, 82%, 89%);
+    --danger-text: hsl(360, 85%, 25%);
+    --danger-hover: hsl(360, 77%, 78%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+}

@@ -1,0 +1,78 @@
+#container {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding-inline: 0.4em;
+  background: var(--bg-primary);
+  z-index: 5;
+}
+
+#innerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 0.4em;
+  padding-inline: 1em;
+  border-radius: 5px;
+  background: var(--bg-secondary);
+}
+
+#left,
+#right {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+#logo {
+  a {
+    text-decoration: none;
+    font-size: 1.6em;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+}
+
+#signIn {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-block: 0.3em;
+  margin-right: 1em;
+  padding: 0.3em 1.3em;
+  border: none;
+  border-radius: 5px;
+  color: var(--bg-primary);
+  background: var(--text-secondary);
+  cursor: pointer;
+}
+
+#profile {
+  position: relative;
+  cursor: pointer;
+}
+
+#avatar {
+  height: 2.4em;
+  margin-block: 0.3em;
+  border-radius: 50%;
+}
+
+#menu {
+  position: absolute;
+  top: 3.6em;
+  right: 0;
+  width: 10em;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  background: var(--bg-secondary);
+}
+
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}

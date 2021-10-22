@@ -1,0 +1,29 @@
+#container {
+  position: relative;
+  width: 100%;
+}
+
+#input {
+  width: 100%;
+  font-size: 1em;
+  padding: 0.5em 1em 0.5em 2.5em;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+
+  &:focus {
+    color: var(--bg-primary);
+    background: var(--text-primary);
+    outline: none;
+  }
+}
+
+#searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 0.9em;
+  transform: translateY(-45%);
+  color: var(--text-secondary);
+}

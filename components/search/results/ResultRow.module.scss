@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  padding: 0.4em 1em;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--bg-primary);
+}
+
+@mixin baseButton {
+  display: grid;
+  place-items: center;
+  font-size: 1.4em;
+  padding: 0.2em;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.add {
+  @include baseButton;
+  color: var(--bg-secondary);
+  background: var(--bg-primary);
+  cursor: pointer;
+}
+
+.alreadyInList {
+  @include baseButton;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+}

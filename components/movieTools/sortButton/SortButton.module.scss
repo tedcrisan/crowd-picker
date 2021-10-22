@@ -1,0 +1,20 @@
+.viewButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  padding: 0.6em;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+
+  &:hover {
+    background: hsla(0, 0, 50, 0.4);
+  }
+
+  &.active {
+    color: var(--text-secondary);
+  }
+}

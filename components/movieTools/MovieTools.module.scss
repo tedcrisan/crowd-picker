@@ -1,0 +1,13 @@
+#container {
+  grid-area: tool;
+  width: 100%;
+  background: var(--bg-primary);
+}
+
+#listHeader {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+  padding: 0.3em 0 1em 0;
+}

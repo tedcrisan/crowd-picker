@@ -1,0 +1,10 @@
+#container {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    "header   header"
+    "sidebar  movies";
+}

@@ -1,0 +1,24 @@
+#selectBar {
+  width: 8em;
+  font-size: 1em;
+  padding: 0.5em 0.6em;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  text-transform: capitalize;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+
+  &:focus {
+    color: var(--bg-primary);
+    background: var(--text-primary);
+    outline: none;
+  }
+}
+
+.optionBar {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  text-transform: capitalize;
+}
