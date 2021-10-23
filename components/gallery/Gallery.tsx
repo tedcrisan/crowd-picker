@@ -33,6 +33,7 @@ export function Gallery({ title, creator, movieList }) {
     if (skeletons) {
       return new Array(parseInt(skeletons)).fill(<SkeletonPoster />);
     }
+    return [];
   };
 
   return (
