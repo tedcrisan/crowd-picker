@@ -8,7 +8,26 @@ import { FaImdb } from "react-icons/fa";
 import styles from "./Poster.module.scss";
 import { useData } from "state/data-context";
 
-export function Poster({ movie, creator, list }) {
+type Movie = {
+  date: string;
+  image: string;
+  imdbID: string;
+  title: string;
+  total_likes: number;
+  total_nevers: number;
+  user_liked: boolean;
+  user_never_watched: boolean;
+  watched: boolean;
+  year: string;
+};
+
+type PosterProps = {
+  movie: Movie;
+  creator: string;
+  list: string;
+};
+
+export function Poster({ movie, creator, list }: PosterProps) {
   const [session, loading] = useSession();
   const { listId, unwatched, setUnwatchedList, watched, setWatchedList } = useData();
 

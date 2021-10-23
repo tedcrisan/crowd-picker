@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  aspect-ratio: 2 / 2.98;
+  border-radius: 5px;
+  overflow: hidden;
+  background: hsla(0, 0%, 100%, 0.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}

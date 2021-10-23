@@ -1,26 +1,39 @@
 import { useState, useEffect, ChangeEvent } from "react";
 
 import styles from "./Gallery.module.scss";
-import { Poster } from "components/poster";
+import { Poster, SkeletonPoster } from "components/poster";
 
 export function Gallery({ title, creator, movieList }) {
-  const [value, setValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
   const [galleryList, setGalleryList] = useState(movieList);
+  const [skeletons, setSkeletons] = useState<unknown[] | []>([]);
 
   useEffect(() => {
-    if (value.length === 0) {
+    setSkeletons(loadSkeletons());
+  }, []);
+
+  useEffect(() => {
+    if (filterValue.length === 0) {
       setGalleryList(movieList);
     } else {
       let tempList = [];
       movieList.forEach((movie) => {
-        if (movie.title.toLowerCase().includes(value.toLowerCase()))
+        if (movie.title.toLowerCase().includes(filterValue.toLowerCase()))
           tempList = [...tempList, movie];
       });
       setGalleryList(tempList);
     }
-  }, [value, movieList]);
+  }, [filterValue, movieList]);
 
-  const handleValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+  const handleValue = (e: ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value);
+
+  //Load skeleton posters while fetching list
+  const loadSkeletons = () => {
+    const skeletons = localStorage.getItem(`${title}Skeletons`);
+    if (skeletons) {
+      return new Array(parseInt(skeletons)).fill(<SkeletonPoster />);
+    }
+  };
 
   return (
     <div id={styles.container}>
@@ -28,10 +41,11 @@ export function Gallery({ title, creator, movieList }) {
         id={styles.searchInput}
         type="text"
         placeholder="Search within list"
-        value={value}
+        value={filterValue}
         onChange={(e) => handleValue(e)}
       />
       <div id={styles.content}>
+        {movieList.length === 0 && skeletons.map((dummy) => dummy)}
         {galleryList.map((movie) => (
           <Poster key={movie.imdbID} {...{ movie, creator }} list={title} />
         ))}

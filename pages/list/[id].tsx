@@ -35,6 +35,7 @@ export default function List({ id }) {
           setCreator(list.creator);
           setUnwatchedList(list.unwatched);
           setWatchedList(list.watched);
+          setNumberOfSkeletons(list.unwatched.length, list.watched.length);
         }
       });
     }
@@ -45,6 +46,11 @@ export default function List({ id }) {
     const temp = localStorage.getItem("theme");
     if (temp) chooseTheme(temp === "light" ? "light" : (temp as Themes));
   }, []);
+
+  const setNumberOfSkeletons = (unwatchedSkeletons: number, watchedSkeletons: number) => {
+    localStorage.setItem("unwatchedSkeletons", unwatchedSkeletons.toString());
+    localStorage.setItem("watchedSkeletons", watchedSkeletons.toString());
+  };
 
   return (
     <div id={styles.container} className={theme}>
