@@ -1,4 +1,6 @@
+import { ReactNode, useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline, IoStatsChart, IoSettingsOutline } from "react-icons/io5";
+import { useChannel } from "../vote/AblyReactEffect";
 
 import styles from "./Sidebar.module.scss";
 
@@ -8,6 +10,18 @@ type SidebarProps = {
 };
 
 export function Sidebar({ current, chooseCurrent }: SidebarProps) {
+  const [notification, setNotification] = useState("");
+  const [channel, ably] = useChannel("sidebar", (message) => {
+    console.log(message);
+    setNotification(message.data);
+  });
+
+  const checkIfInVote = (): boolean => {
+    //Don't show notification if user is already at vote component
+    if (notification === "vote" && current !== "vote") return true;
+    return false;
+  };
+
   return (
     <div id={styles.container}>
       <div id={styles.main}>
@@ -27,9 +41,15 @@ export function Sidebar({ current, chooseCurrent }: SidebarProps) {
         </button>
         <button
           className={`${styles.item} ${current === "vote" ? styles.active : null}`}
-          onClick={() => chooseCurrent("vote")}
+          onClick={() => {
+            chooseCurrent("vote");
+            setNotification("");
+          }}
         >
-          <IoStatsChart size="26px" />
+          <div className={styles.icon}>
+            <IoStatsChart size="26px" />
+            {checkIfInVote() ? <span className={styles.notification}></span> : null}
+          </div>
           <span className={styles.text}>Vote</span>
         </button>
       </div>

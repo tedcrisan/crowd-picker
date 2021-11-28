@@ -94,7 +94,7 @@ export default async (req, res) => {
         })
         .catch((err) => {
           console.log(err);
-          //res.sendStatus(400);
+          res.sendStatus(400);
         });
 
       break;
@@ -247,5 +247,4 @@ export default async (req, res) => {
       //res.setHeader("Allow", ["GET", "PUT"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-  //res.end();
 };

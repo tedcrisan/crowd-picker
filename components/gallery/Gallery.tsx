@@ -6,7 +6,7 @@ import { Poster, SkeletonPoster } from "components/poster";
 export function Gallery({ title, creator, movieList }) {
   const [filterValue, setFilterValue] = useState("");
   const [galleryList, setGalleryList] = useState(movieList);
-  const [skeletons, setSkeletons] = useState<unknown[] | []>([]);
+  const [skeletons, setSkeletons] = useState(0);
 
   useEffect(() => {
     setSkeletons(loadSkeletons());
@@ -29,11 +29,17 @@ export function Gallery({ title, creator, movieList }) {
 
   //Load skeleton posters while fetching list
   const loadSkeletons = () => {
-    const skeletons = localStorage.getItem(`${title}Skeletons`);
-    if (skeletons) {
-      return new Array(parseInt(skeletons)).fill(<SkeletonPoster />);
+    const numberOfSkeletons = localStorage.getItem(`${title}Skeletons`);
+    if (numberOfSkeletons) return parseInt(numberOfSkeletons);
+    return 0;
+  };
+
+  const placeholders = (n: number) => {
+    let tempArray = [];
+    for (let i = 0; i < n; i++) {
+      tempArray.push(<SkeletonPoster key={i} />);
     }
-    return [];
+    return tempArray;
   };
 
   return (
@@ -46,7 +52,7 @@ export function Gallery({ title, creator, movieList }) {
         onChange={(e) => handleValue(e)}
       />
       <div id={styles.content}>
-        {movieList.length === 0 && skeletons.map((dummy) => dummy)}
+        {movieList.length === 0 && placeholders(skeletons).map((dummy) => dummy)}
         {galleryList.map((movie) => (
           <Poster key={movie.imdbID} {...{ movie, creator }} list={title} />
         ))}

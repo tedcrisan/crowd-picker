@@ -113,6 +113,43 @@ export function Poster({ movie, creator, list }: PosterProps) {
     }
   };
 
+  const addToVote = (data) => {
+    const movieData = {
+      imdbID: data.imdbID,
+      title: data.title,
+      image: data.image,
+      year: data.year,
+      voteTotal: 0,
+    };
+
+    if (typeof window !== "undefined") {
+      let storedVoteList = localStorage.getItem("voteMovies");
+
+      if (storedVoteList) {
+        let jsonList = JSON.parse(storedVoteList);
+
+        //Limit of 5 movies
+        if (jsonList.movies.length === 5) {
+          toast.error("5 movie vote limit");
+          return;
+        }
+
+        //Check if movie is already in list
+        const duplicate = jsonList.movies.find((item) => item.imdbID === movieData.imdbID);
+        if (duplicate) {
+          toast.error("Movie already up for vote");
+          return;
+        }
+
+        let updatedMovies = [...jsonList.movies, movieData];
+        localStorage.setItem("voteMovies", JSON.stringify({ ...jsonList, movies: updatedMovies }));
+      } else {
+        localStorage.setItem("voteMovies", JSON.stringify({ movies: [movieData] }));
+      }
+      toast.success("Movie added to vote");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <img className={styles.moviePoster} src={movie.image} alt={movie.imdbID} />
@@ -141,6 +178,9 @@ export function Poster({ movie, creator, list }: PosterProps) {
             </span>
             <span className={styles.switchContainer} onClick={() => switchList(movie.imdbID)}>
               {movie.watched ? "Unwatch" : "Watched"}
+            </span>
+            <span className={styles.switchContainer} onClick={() => addToVote(movie)}>
+              Vote
             </span>
           </>
         )}

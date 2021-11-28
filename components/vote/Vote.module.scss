@@ -1,0 +1,116 @@
+#container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: fit-content(10em) 5em 1fr;
+  grid-template-areas:
+    "activeVote activeVote  activeVote"
+    "previous   info        info      "
+    "movies     movies      movies    ";
+  gap: 1.2em;
+}
+
+#gallery {
+  grid-area: movies;
+  display: flex;
+  justify-content: center;
+}
+
+#movies {
+  max-width: 80em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  gap: 1.2em;
+}
+
+#noActiveVoteContainer {
+  grid-area: activeVote;
+  width: clamp(20em, 40em, 50em);
+  background: var(--bg-secondary);
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  margin: 0 auto;
+
+  h2 {
+    font-weight: 300;
+    font-size: 3em;
+  }
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#info {
+  grid-area: info;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2em;
+}
+
+#voteTools {
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    font-size: 2em;
+    padding: 0.2em 1em;
+    border: none;
+    border-radius: 5px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+}
+
+#clear {
+  font-size: 2em;
+  padding: 0.2em 1em;
+  border: none;
+  border-radius: 5px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+#timeInput {
+  text-align: right;
+  width: 1.3em;
+  font-size: 3em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--text-secondary);
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+#clock {
+  display: flex;
+  align-items: flex-end;
+  font-size: 3em;
+  color: var(--text-secondary);
+}
+
+#previous {
+  display: flex;
+  align-items: flex-end;
+  font-size: 2em;
+  color: var(--text-secondary);
+  padding-left: 2em;
+}

@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/client";
+import dynamic from "next/dynamic";
 
 import styles from "styles/List.module.scss";
 import { Header } from "components/header";
-import { Sidebar } from "components/sidebar";
 import { Content } from "components/content";
 import { Gallery } from "components/gallery/Gallery";
 import { fetchList } from "utils/fetchList";
 import { useData } from "state/data-context";
 import { Themes } from "components/themePicker/ThemePicker";
+const Sidebar = dynamic(() => import("components/sidebar").then((mod) => mod.Sidebar), {
+  ssr: false,
+});
+const Vote = dynamic(() => import("components/vote").then((mod) => mod.Vote), { ssr: false });
 
 export default function List({ id }) {
-  const [session, loading] = useSession();
   const [creator, setCreator] = useState(false);
   const {
     chooseId,
@@ -61,6 +63,7 @@ export default function List({ id }) {
           <Gallery title="unwatched" movieList={unwatched} {...{ creator }} />
         )}
         {current === "watched" && <Gallery title="watched" movieList={watched} {...{ creator }} />}
+        {current === "vote" && <Vote creator={creator} />}
       </Content>
     </div>
   );
