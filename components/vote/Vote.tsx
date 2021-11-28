@@ -11,7 +11,7 @@ type VoteProps = {
   creator: boolean;
 };
 
-export function Vote({ creator }: VoteProps) {
+export default function Vote({ creator }: VoteProps) {
   const { listId } = useData();
   const [session, loading] = useSession();
   const [movies, setMovies] = useState([]);

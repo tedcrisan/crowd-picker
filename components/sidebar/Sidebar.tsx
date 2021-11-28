@@ -9,7 +9,7 @@ type SidebarProps = {
   chooseCurrent: (a: string) => void;
 };
 
-export function Sidebar({ current, chooseCurrent }: SidebarProps) {
+export default function Sidebar({ current, chooseCurrent }: SidebarProps) {
   const [notification, setNotification] = useState("");
   const [channel, ably] = useChannel("sidebar", (message) => {
     console.log(message);

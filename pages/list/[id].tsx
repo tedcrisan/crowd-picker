@@ -8,10 +8,8 @@ import { Gallery } from "components/gallery/Gallery";
 import { fetchList } from "utils/fetchList";
 import { useData } from "state/data-context";
 import { Themes } from "components/themePicker/ThemePicker";
-const Sidebar = dynamic(() => import("components/sidebar").then((mod) => mod.Sidebar), {
-  ssr: false,
-});
-const Vote = dynamic(() => import("components/vote").then((mod) => mod.Vote), { ssr: false });
+const Sidebar = dynamic(() => import("components/sidebar/Sidebar"), { ssr: false });
+const Vote = dynamic(() => import("components/vote/Vote"), { ssr: false });
 
 export default function List({ id }) {
   const [creator, setCreator] = useState(false);
