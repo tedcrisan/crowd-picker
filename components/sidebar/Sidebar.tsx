@@ -12,7 +12,6 @@ type SidebarProps = {
 export default function Sidebar({ current, chooseCurrent }: SidebarProps) {
   const [notification, setNotification] = useState("");
   const [channel, ably] = useChannel("sidebar", (message) => {
-    console.log(message);
     setNotification(message.data);
   });
 

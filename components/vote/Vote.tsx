@@ -29,6 +29,8 @@ export default function Vote({ creator }: VoteProps) {
     if (message.name === "start") {
       setMovies(message.data.movies);
       setCurrentTime(Math.round((message.data.vote_end - Date.now()) / 1000));
+      setHasVoted(false);
+      localStorage.setItem("hasVoted", "false");
       setVoteActive(true);
       localStorage.setItem("voteActive", "true");
     }

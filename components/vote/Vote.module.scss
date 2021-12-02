@@ -18,14 +18,15 @@
 
 #movies {
   max-width: 80em;
+  min-width: 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
   gap: 1.2em;
 }
 
 #noActiveVoteContainer {
   grid-area: activeVote;
-  width: clamp(20em, 40em, 50em);
+  width: clamp(10em, 40em, 50em);
   background: var(--bg-secondary);
   display: grid;
   place-items: center;

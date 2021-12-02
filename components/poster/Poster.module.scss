@@ -44,6 +44,12 @@
   cursor: pointer;
 }
 
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em;
+}
+
 @mixin spanContainer {
   width: min-content;
   display: flex;

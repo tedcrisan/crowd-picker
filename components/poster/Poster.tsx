@@ -169,7 +169,7 @@ export function Poster({ movie, creator, list }: PosterProps) {
           <FaImdb size="24px" />
         </button>
         {creator && (
-          <>
+          <div className={styles.choices}>
             <span
               className={styles.removeContainer}
               onClick={() => removeMovie(movie.imdbID, list === "watched")}
@@ -182,7 +182,7 @@ export function Poster({ movie, creator, list }: PosterProps) {
             <span className={styles.switchContainer} onClick={() => addToVote(movie)}>
               Vote
             </span>
-          </>
+          </div>
         )}
       </div>
       {!movie.watched && (
